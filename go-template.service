@@ -1,0 +1,16 @@
+# Copy to /etc/systemd/system/go-template.service
+[Unit]
+Description=Go Template (Trocar)
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=root
+ExecStart=/root/github/go-template/go-template
+WorkingDirectory=/root/github/go-template
+
+[Install]
+WantedBy=multi-user.target
