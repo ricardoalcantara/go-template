@@ -4,6 +4,8 @@ import (
 	"errors"
 	"os"
 
+	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 	"github.com/sirupsen/logrus"
 
 	"gorm.io/driver/postgres"
@@ -57,4 +59,8 @@ func createTypes() {
 			panic(err)
 		}
 	}
+}
+
+func GetUserId(c *gin.Context) (uuid.UUID, error) {
+	return uuid.Parse(c.GetString("x-user-id"))
 }
