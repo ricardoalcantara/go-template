@@ -9,6 +9,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	"github.com/ricardoalcantara/go-template/internal/domain/foo"
+	messagebroker "github.com/ricardoalcantara/go-template/internal/message_broker"
 	"github.com/ricardoalcantara/go-template/internal/models"
 	"github.com/ricardoalcantara/go-template/internal/utils"
 	"github.com/ricardoalcantara/go-template/internal/version"
@@ -28,6 +29,8 @@ func init() {
 }
 
 func main() {
+	messagebroker.Start()
+
 	r := gin.New()
 	r.Use(
 		gin.LoggerWithWriter(gin.DefaultWriter, "/healthcheck"),

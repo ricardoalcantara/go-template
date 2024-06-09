@@ -12,7 +12,7 @@ import (
 )
 
 func AuthMiddleware() gin.HandlerFunc {
-	identity_provider_endpoint := os.Getenv("IDENTITY_PROVIDER_ENDPOINT") + "/api/auth/claims"
+	identity_endpoint := os.Getenv("IDENTITY_ENDPOINT") + "/api/auth/claims"
 	return func(c *gin.Context) {
 
 		authToken := getBearerToken(c)
@@ -22,7 +22,7 @@ func AuthMiddleware() gin.HandlerFunc {
 			return
 		}
 
-		claims, err := token.ValidateTokenWithIdp(authToken, identity_provider_endpoint)
+		claims, err := token.ValidateTokenWithIdp(authToken, identity_endpoint)
 		if err != nil {
 			c.AbortWithStatusJSON(http.StatusUnauthorized, domain.ErrorResponse{Error: utils.PrintError(err)})
 			return
@@ -36,7 +36,7 @@ func AuthMiddleware() gin.HandlerFunc {
 }
 
 func AuthMiddlewareWithRole(roles []string) gin.HandlerFunc {
-	identity_provider_endpoint := os.Getenv("IDENTITY_PROVIDER_ENDPOINT") + "/api/auth/claims"
+	identity_endpoint := os.Getenv("IDENTITY_ENDPOINT") + "/api/auth/claims"
 	return func(c *gin.Context) {
 
 		authToken := getBearerToken(c)
@@ -46,7 +46,7 @@ func AuthMiddlewareWithRole(roles []string) gin.HandlerFunc {
 			return
 		}
 
-		claims, err := token.ValidateTokenWithIdp(authToken, identity_provider_endpoint)
+		claims, err := token.ValidateTokenWithIdp(authToken, identity_endpoint)
 		if err != nil {
 			c.AbortWithStatusJSON(http.StatusUnauthorized, domain.ErrorResponse{Error: utils.PrintError(err)})
 			return
