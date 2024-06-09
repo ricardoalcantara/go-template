@@ -40,7 +40,7 @@ func put(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusCreated, FooView{
+	c.JSON(http.StatusAccepted, FooView{
 		Id:   foo.ID.String(),
 		Name: foo.Name,
 	})
