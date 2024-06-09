@@ -13,6 +13,6 @@ const (
 )
 
 type BarType struct {
-	ID BarTypeId `gorm:"type:tinyint unsigned;primary_key"`
+	ID BarTypeId `gorm:"type:smallint;primary_key"`
 	TableType
 }

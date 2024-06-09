@@ -17,7 +17,7 @@ func get(c *gin.Context) {
 		return
 	}
 
-	foo, err := models.GetFoo(models.DbUUID(fooId))
+	foo, err := models.GetFoo(fooId)
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusBadRequest, domain.ErrorResponse{Error: utils.PrintError(err)})
 		return

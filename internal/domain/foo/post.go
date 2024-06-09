@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 	"github.com/ricardoalcantara/go-template/internal/domain"
 	"github.com/ricardoalcantara/go-template/internal/models"
 	"github.com/ricardoalcantara/go-template/internal/utils"
@@ -18,7 +19,7 @@ func post(c *gin.Context) {
 	}
 
 	foo := models.Foo{
-		ID:   models.NewDbUUID(),
+		ID:   uuid.New(),
 		Name: input.Name,
 	}
 

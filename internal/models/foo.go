@@ -3,11 +3,12 @@ package models
 import (
 	"time"
 
+	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
 
 type Foo struct {
-	ID        DbUUID `gorm:"primary_key;default:(UUID_TO_BIN(UUID()));"`
+	ID        uuid.UUID `gorm:"type:uuid;default:gen_random_uuid();primaryKey"`
 	CreatedAt time.Time
 	UpdatedAt time.Time
 	DeletedAt gorm.DeletedAt `gorm:"index"`
@@ -37,7 +38,7 @@ func (f *Foo) Delete() error {
 		Error
 }
 
-func GetFoo(id DbUUID) (*Foo, error) {
+func GetFoo(id uuid.UUID) (*Foo, error) {
 	var err error
 	f := Foo{}
 	err = DB.Take(&f, "id = ?", id).Error
