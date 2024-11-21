@@ -50,7 +50,7 @@ func GetFoo(id uuid.UUID) (*Foo, error) {
 	return &f, nil
 }
 
-func ListFoo(pagination *Pagination) ([]Foo, error) {
+func ListFoo(userId uuid.UUID, pagination *Pagination) ([]Foo, error) {
 	var err error
 	var f []Foo
 
@@ -59,7 +59,7 @@ func ListFoo(pagination *Pagination) ([]Foo, error) {
 	}
 	err = DB.
 		Scopes(pagination.GetScope).
-		Find(&f).Error
+		Find(&f, "user_id = ?", userId).Error
 
 	if err != nil {
 		return nil, err
